@@ -13,7 +13,7 @@ export default function UserView({productsData}) {
         const productsArr = productsData.map(product => {
             if(product.isActive === true) {
                 return (
-                	<Col xs={12} md={4} className="d-flex align-items-stretch my-3">
+                	<Col xs={12} md={4} className="d-flex align-items-stretch my-3" key={product._id}>
                     <ProductCard productProp={product} key={product._id}/>
                     </Col>
                     )

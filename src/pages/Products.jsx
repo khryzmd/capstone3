@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-// import AdminView from '../components/AdminView';
+import AdminView from '../components/AdminView';
 import UserView from '../components/UserView';
 import UserContext from '../context/UserContext';
 

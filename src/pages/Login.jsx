@@ -1,13 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserContext from '../context/UserContext';
 
 export default function Login() {
 
     const { user, setUser } = useContext(UserContext);
-    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -45,7 +44,6 @@ export default function Login() {
                     icon: "success",
                     text: "You are now logged in."
                 })
-                navigate('/products');
             
             } else if (data.message == "Incorrect email or password") {
 
@@ -78,11 +76,11 @@ export default function Login() {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            console.log(data.user);
 
             setUser({
-                id: data._id,
-                isAdmin: data.isAdmin
+                id: data.user._id,
+                isAdmin: data.user.isAdmin
             });
         })
     }
