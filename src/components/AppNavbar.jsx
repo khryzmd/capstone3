@@ -16,19 +16,19 @@ export default function AppNavbar(){
             <Navbar.Brand as={Link} to="/">E-Commerce App</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
+              <Nav className="ms-auto">
                 <Nav.Link as={NavLink} to="/" exact="true">Home</Nav.Link>
                 <Nav.Link as={NavLink} to="/products" exact="true">Products</Nav.Link>
-                <Nav.Link as={NavLink} to="/news" exact="true">News</Nav.Link>
                 {(user.id !== null && user.id !== undefined) ? 
                     user.isAdmin 
                         ?
                         <>
-                            <Nav.Link as={Link} to="/addProduct">Add Product</Nav.Link>
+                            <Nav.Link as={NavLink} to="/profile" exact="true">Profile</Nav.Link>
                             <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
                         </>
                         :
                         <>
+                            <Nav.Link as={NavLink} to="/cart" exact="true">Cart</Nav.Link>
                             <Nav.Link as={NavLink} to="/profile" exact="true">Profile</Nav.Link>
                             <Nav.Link as={NavLink} to="/logout" exact="true">Logout</Nav.Link>
                         </>

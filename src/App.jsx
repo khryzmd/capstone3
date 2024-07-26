@@ -7,10 +7,9 @@ import AppNavbar from './components/AppNavbar';
 // // import Banner from './components/Banner';
 // // import Highlights from './components/Highlights';
 // import Home from './pages/Home';
-// import AddProduct from './pages/AddProduct';
 import Products from './pages/Products';
 import ProductView from './pages/ProductView';
-// import News from './pages/News';
+import CartView from './pages/CartView';
 // import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -68,8 +67,7 @@ function App() {
               {/*<Route path="*" element={<Error />} />*/}
               <Route path="/products" element={<Products />}/>
               <Route path="/products/:productId" element={<ProductView />}/>
-              {/*<Route path="/addProduct" element={<AddProduct />} />*/}
-              {/*<Route path="/news" element={<News />} />*/}
+              <Route path="/cart" element={<CartView />} />
               {/*<Route path="/profile" element={<Profile />} />*/}
               <Route path="/register" element={<Register />}/>
               <Route path="/login" element={<Login />}/>

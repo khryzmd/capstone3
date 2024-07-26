@@ -27,8 +27,9 @@ export default function ProductView(){
 			},
 			body: JSON.stringify({
 				productId: productId,
-				quantity: quantity,
-				price: price
+				name: name,
+				price: price,
+				quantity: quantity
 			})
 		})
 		.then(res => res.json())
