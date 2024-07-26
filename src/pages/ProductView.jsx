@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { Container, Card, Button, Row, Col } from 'react-bootstrap';
+import { Container, Card, Button, ButtonGroup, Row, Col } from 'react-bootstrap';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -17,6 +17,7 @@ export default function ProductView(){
 	const [price, setPrice] = useState(0);
 	const [quantity, setQuantity] = useState(1);
 	const [description, setDescription] = useState("");
+
 
 	function addToCart(productId){
 		fetch(`${import.meta.env.VITE_API_URL}/cart/add-to-cart`, {
@@ -71,6 +72,15 @@ export default function ProductView(){
 
 	}, [productId]);
 
+	const increaseQuantity = () => {
+		setQuantity(quantity + 1);
+	}
+
+	const decreaseQuantity = () => {
+		setQuantity(quantity - 1);
+	}
+
+
 	return(
         <Container className="mt-5">
             <Row>
@@ -80,7 +90,16 @@ export default function ProductView(){
                             <Card.Title>{name}</Card.Title>
                             <Card.Text>{description}</Card.Text>
                             <Card.Text>Price: ₱{price}</Card.Text>
-                            <Card.Subtitle>Quantity: {quantity}</Card.Subtitle>
+                            <Card.Subtitle>Quantity:</Card.Subtitle>
+                            <div>
+                            <ButtonGroup size="sm" className="mt-3">
+							  <Button variant="dark" onClick={decreaseQuantity} disabled={quantity < 2}>-</Button>
+							  <div className="d-flex align-items-center px-3" style={{ border: '1px solid #ced4da'}}>
+							    {quantity}
+							  </div>
+							  <Button variant="dark" onClick={increaseQuantity}>+</Button>
+							</ButtonGroup>
+						     </div>
                             { (user.id !== null && user.id !== undefined) ?
                             <Button className="mt-3" variant="primary" block="true" onClick={() => addToCart(productId)}>Add to Cart</Button>
                             :
