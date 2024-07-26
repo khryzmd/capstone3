@@ -81,7 +81,7 @@ export default function ProductView(){
                             <Card.Text>Price: ₱{price}</Card.Text>
                             <Card.Subtitle>Quantity: {quantity}</Card.Subtitle>
                             { (user.id !== null && user.id !== undefined) ?
-                            <Button variant="primary" block="true" onClick={() => addToCart(productId)}>Add to Cart</Button>
+                            <Button className="mt-3" variant="primary" block="true" onClick={() => addToCart(productId)}>Add to Cart</Button>
                             :
                             <Link className="btn btn-danger btn-block mt-3" to="/login">Log in to Add to Cart</Link>
                             }

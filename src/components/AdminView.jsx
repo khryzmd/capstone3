@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button, Table, Container } from 'react-bootstrap';
 import UpdateProduct from './UpdateProduct';
 import ArchiveProduct from './ArchiveProduct';
+import AddNewProduct from './AddNewProduct';
 
 export default function AdminView({ productsData, fetchData }) {
 
     const [products, setProducts] = useState([])
+    const [showUserOrders, setShowUserOrders] = useState(false);
 
     useEffect(() => {
         console.log(productsData);
@@ -32,10 +34,17 @@ export default function AdminView({ productsData, fetchData }) {
 
     }, [productsData])
 
-
     return(
-        <>
-            <h1 className="text-center my-4"> Admin Dashboard</h1>
+             <>
+            <h1 className="text-center mt-4"> Admin Dashboard</h1>
+            {(showUserOrders === false) ?
+            <>
+            <Container className="text-center mb-4">
+            <AddNewProduct fetchData={fetchData}/>
+                <Button className="mx-1" variant="success" size="sm" onClick={() => setShowUserOrders(true)}>
+                  Show User Orders
+                </Button>
+            </Container>
             
             <Table striped bordered hover responsive>
                 <thead>
@@ -52,8 +61,19 @@ export default function AdminView({ productsData, fetchData }) {
                 <tbody>
                     {products}
                 </tbody>
-            </Table>    
-        </>
-
+            </Table>   
+            </>
+            :
+            
+            <Container className="text-center mb-4">
+            <AddNewProduct fetchData={fetchData}/>
+                <Button className="mx-1" variant="danger" size="sm" onClick={() => setShowUserOrders(false)}>
+                  Show Product Details
+                </Button>
+            </Container>
+            
+            
+            }
+            </>
         )
 }
