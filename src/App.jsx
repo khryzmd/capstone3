@@ -4,17 +4,15 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import AppNavbar from './components/AppNavbar';
-// // import Banner from './components/Banner';
-// // import Highlights from './components/Highlights';
-// import Home from './pages/Home';
+import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductView from './pages/ProductView';
 import CartView from './pages/CartView';
-// import Profile from './pages/Profile';
+import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
-// import Error from './pages/Error';
+import Error from './pages/Error';
 
 function App() {
 
@@ -63,12 +61,12 @@ function App() {
           <AppNavbar />
           <Container>
             <Routes>
-              {/*<Route path="/" element={<Home />}/>*/}
-              {/*<Route path="*" element={<Error />} />*/}
+              <Route path="/" element={<Home />}/>
+              <Route path="*" element={<Error />} />
               <Route path="/products" element={<Products />}/>
               <Route path="/products/:productId" element={<ProductView />}/>
               <Route path="/cart" element={<CartView />} />
-              {/*<Route path="/profile" element={<Profile />} />*/}
+              <Route path="/profile" element={<Profile />} />
               <Route path="/register" element={<Register />}/>
               <Route path="/login" element={<Login />}/>
               <Route path="/logout" element={<Logout />}/>

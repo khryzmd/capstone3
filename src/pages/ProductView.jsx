@@ -40,14 +40,29 @@ export default function ProductView(){
 			if(data.message === "Item added to cart successfully"){
 
 				Swal.fire({
-					title: "Item added to cart successfully!",
-					icon: "success",
-					text: `Total items in cart: ${data.cart.cartItems.length}`
-				});
+				  title: "Item Added to Cart Successfully!",
+				  icon: "success",
+				  html: `
+				    <div style="font-size: 16px; text-align: center;">
+				      <strong>Item:</strong> <span style="color: #007bff;">${name}</span><br>
+				      <strong>Total items in cart:</strong> <span style="color: #28a745;">${data.cart.cartItems.length}</span>
+				    </div>
+				  `,
+			    showDenyButton: true, 
+			    confirmButtonText: 'Back to Products',
+			    denyButtonText: 'View Cart', 
+			    confirmButtonColor: '#007bff', 
+			    denyButtonColor: '#28a745', 
+			    preConfirm: () => {
+			    navigate("/products")
+			    },
+			    preDeny: () => {
+			    navigate("/cart")
+			      
+			    }
+			  });
 
-				navigate("/products");
-
-			}else{
+			} else {
 
 				Swal.fire({
 					title: "Error",

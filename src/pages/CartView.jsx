@@ -42,7 +42,7 @@ export default function CartView() {
     }, []);
 
 
-   const removeCartItem = (productId) => {
+   const removeCartItem = (productId, name) => {
     	fetch(`${import.meta.env.VITE_API_URL}/cart/${productId}/remove-from-cart`, {
     		method: "PATCH",
     		headers: {
@@ -51,13 +51,13 @@ export default function CartView() {
     	})
     	.then(res => res.json())
     	.then(data => {
-    		console.log(data.message, productId);
+    		console.log(data, productId);
     		if(data.message === "Item removed from cart successfully"){
 
 				Swal.fire({
 					title: "Success!",
 					icon: "success",
-					text: `Item successfully removed`
+					text: `${name} successfully removed`
 				});
 				fetchData();
 
@@ -73,45 +73,70 @@ export default function CartView() {
     }
 
     const updateQuantity = (btn, item) => {
-		switch (btn) {
-		  case '+':
-		    console.log('Incremented');
-		    item.quantity += 1;
-		    break;
-		  case '-':
-		    console.log('Decremented');
-		    item.quantity -= 1;
-		    break;
-		}
-    	fetch(`${import.meta.env.VITE_API_URL}/cart/update-cart-quantity`, {
-    		method: "PATCH",
-    		headers: {
-    			"Content-Type": "application/json",
-    			Authorization: `Bearer ${localStorage.getItem('token')}`
-    		},
-			body: JSON.stringify({
-				productId: item.productId,
-				name: item.name,
-				price: item.price,
-				quantity: item.quantity
-			})
+	  // Update quantity based on button press
+	  item.quantity += btn === '+' ? 1 : btn === '-' ? -1 : 0;
 
-    	})
-    	.then(res => res.json())
-    	.then(data => {
-    		console.log(data);
-    		if(data.message === "Item quantity updated successfully"){
-    			console.log("Item quantity updated successfully")
+	  // Request options
+	  const options = {
+	    method: "PATCH",
+	    headers: {
+	      "Content-Type": "application/json",
+	      Authorization: `Bearer ${localStorage.getItem('token')}`
+	    },
+	    body: JSON.stringify({
+	      productId: item.productId,
+	      name: item.name,
+	      price: item.price,
+	      quantity: item.quantity
+	    })
+	  };
+
+	  // Send request and handle response
+	  fetch(`${import.meta.env.VITE_API_URL}/cart/update-cart-quantity`, options)
+	    .then(res => res.json())
+	    .then(data => {
+	      console.log(data.message);
+	      fetchData();
+	    })
+	    .catch(error => console.error("Update quantity error:", error));
+	};
+
+
+	const clearCart = () => {
+		// Request options
+	  const options = {
+	    method: "PUT",
+	    headers: {
+	      Authorization: `Bearer ${localStorage.getItem('token')}`
+	    }
+	  };
+
+	  // Send request and handle response
+	  fetch(`${import.meta.env.VITE_API_URL}/cart/clear-cart`, options)
+	    .then(res => res.json())
+	    .then(data => {
+	      console.log(data);
+	      if(data.message === "Cart cleared successfully"){
+
+				Swal.fire({
+					title: "Success!",
+					icon: "success",
+					text: `Cart successfully cleared`
+				});
 				fetchData();
+
 			}else{
-				console.error("Error updating quantity")
-				fetchData();
+
+				Swal.fire({
+					title: "Error",
+					icon: "error",
+					text: "Something went wrong. Please try again. If the error persists, please consult with the administrator."
+				});
 			}
-    	})
-    	.catch(error => {
-    		console.error("Update quantity error:", error)
-    	})
-    }
+	    })
+	    .catch(error => console.error("Clear cart error:", error));
+	}
+
 
 
 
@@ -120,7 +145,7 @@ export default function CartView() {
 	            return (
 	                <tr key={item._id}>
 	                    <td>{item._id}</td>
-	                    <td>{item.name}</td>
+	                    <td><Link to={`/products/${item.productId}`}>{item.name}</Link></td>
 	                    <td>₱{item.price}</td>
 	                    <td>
 	                    <ButtonGroup size="sm">
@@ -133,7 +158,7 @@ export default function CartView() {
 	                    </td>
 	                    <td>₱{item.subtotal}</td>
 	                    <td className="text-center">
-	                    <Button variant="danger" onClick={() => removeCartItem(item.productId)}>Remove</Button>
+	                    <Button variant="danger" onClick={() => removeCartItem(item.productId, item.name)}>Remove</Button>
 	                    </td>
 	                </tr>
 	                )
@@ -171,7 +196,7 @@ export default function CartView() {
 			          </td>
 			          <td colSpan={2} className="fs-5">Total: ₱{total} </td>
 			        </tr>
-			        <Button variant="danger" className="mt-3">Clear Cart</Button>
+			        <Button variant="danger" className="mt-3" onClick={clearCart}>Clear Cart</Button>
 			        </>
                 }
                     
