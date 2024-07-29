@@ -13,6 +13,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Error from './pages/Error';
+import UserOrders from './pages/UserOrders';
+
 
 function App() {
 
@@ -66,6 +68,7 @@ function App() {
               <Route path="/products" element={<Products />}/>
               <Route path="/products/:productId" element={<ProductView />}/>
               <Route path="/cart" element={<CartView />} />
+              <Route path="/orders" element={<UserOrders />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/register" element={<Register />}/>
               <Route path="/login" element={<Login />}/>

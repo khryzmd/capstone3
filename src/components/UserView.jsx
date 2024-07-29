@@ -13,9 +13,12 @@ export default function UserView({productsData}) {
         const productsArr = productsData.map(product => {
             if(product.isActive === true) {
                 return (
-                	<Col xs={12} md={4} className="d-flex align-items-stretch my-3" key={product._id}>
-                    <ProductCard productProp={product} key={product._id}/>
+                	<Col xs={12} sm={6} md={4} lg={3} className="d-flex align-items-stretch my-3" key={product._id}>
+                    <div className="d-flex flex-column h-100">
+                        <ProductCard productProp={product} />
+                    </div>
                     </Col>
+
                     )
             } else {
                 return null;

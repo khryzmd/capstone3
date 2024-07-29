@@ -53,7 +53,7 @@ export default function Profile(){
             :
             <>
             <Row>
-                <Col className="mt-5 p-5 bg-primary text-white">
+                <Col className="mt-5 p-5 bg-dark text-white">
                     <h1 className="mb-5 ">Profile</h1>
                     <h2 className="mt-3">{`${details.firstName} ${details.lastName}`}</h2>
                     <hr />

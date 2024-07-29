@@ -8,3 +8,36 @@
 .cardHighlight{
   min-height: 100%;
 }
+
+/* Accordion */
+
+
+.black-accordion .accordion-body {
+  background-color: white;
+  color: black;
+}
+
+.black-accordion .accordion-button {
+  color: white;
+  background-color: #373A3C;
+  border: 1px solid #444;
+}
+
+.black-accordion .accordion-button:not(.collapsed) {
+  color: orange;
+  border-color: #444;
+}
+
+.black-accordion .accordion-button {
+  padding: 1rem;
+  margin: 0;
+}
+
+.black-accordion .accordion-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+/* End of Accordion */
+

@@ -168,6 +168,43 @@ export default function CartView() {
 
 	    }, [cart])
 
+
+
+	const checkOut = () => {
+	    fetch(`${import.meta.env.VITE_API_URL}/orders/checkout`, {
+	        method: "POST",
+	        headers: {
+	            "Content-Type": "application/json",
+	            Authorization: `Bearer ${localStorage.getItem('token')}`
+	        }})
+	    .then(res => res.json())
+	    .then(data => {
+	    	console.log(data.message);
+	        if (data.message === "Ordered Successfully") {
+	            Swal.fire({
+	                title: "Success!",
+	                icon: "success",
+	                text: "Checkout completed successfully!"
+	            })
+	            .then((result) => {
+	            	if (result.isConfirmed) {
+	            		clearCart();
+	            	}
+	            })
+	        } else {
+	            Swal.fire({
+	                title: "Error",
+	                icon: "error",
+	                text: `${data.message}`
+	            });
+	        }
+	    })
+	    .catch(error => {
+	        console.error("Checkout error:", error);});
+	};
+
+
+
     return(
             <>
             <h1 className="text-center mt-4">Your Shopping Cart</h1>     
@@ -192,7 +229,7 @@ export default function CartView() {
 			        <>
 			        <tr>
 			          <td colSpan={4}>
-			          <Button variant="success">Check Out</Button>
+			          <Button variant="success" onClick={checkOut}>Check Out</Button>
 			          </td>
 			          <td colSpan={2} className="fs-5">Total: ₱{total} </td>
 			        </tr>

@@ -8,12 +8,13 @@ export default function ProductCard({productProp}) {
     const { _id, name, description, price} = productProp
 
     return (
-        <Card>
-            <Card.Body>
-                <Card.Title>{name}</Card.Title>
-                <Card.Text>{description}</Card.Text>
-                <Card.Text className="fw-semibold">₱{price}</Card.Text>
-                <Link className="btn btn-primary" to={`/products/${_id}`}>Details</Link>
+         <Card className="d-flex flex-column h-100">
+            <Card.Body className="d-flex flex-column">
+                <Card.Title className="mb-2">{name}</Card.Title>
+                <Card.Text className="fw-semibold mb-3">₱{price}</Card.Text>
+                <div className="mt-auto">
+                    <Link className="btn btn-primary" to={`/products/${_id}`}>Details</Link>
+                </div>
             </Card.Body>
         </Card>
     )

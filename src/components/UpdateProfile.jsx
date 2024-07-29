@@ -75,7 +75,7 @@ const ProfileUpdate = () => {
         {error && <div className="alert alert-danger">{error}</div>}
         {success && <div className="alert alert-success">{success}</div>}
 
-        <Button variant="primary" type="submit" className="mb-3">
+        <Button variant="danger" type="submit" className="mb-3">
           Update Profile
         </Button>
       </Form>

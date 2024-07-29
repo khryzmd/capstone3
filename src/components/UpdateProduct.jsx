@@ -72,7 +72,7 @@ export default function UpdateProduct({product, fetchData}){
 
 	return(
 		<>
-			<Button variant="primary" size="sm" onClick={() => openUpdate(product)}>Update</Button>
+			<Button variant="primary" size="sm" onClick={() => openUpdate(product)} className="mt-2">Update</Button>
             <Modal show={showUpdate} onHide={closeUpdate}>
                 <Form onSubmit={e => updateProduct(e, productId)}>
                     <Modal.Header closeButton>
